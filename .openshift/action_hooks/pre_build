@@ -3,3 +3,13 @@
 # available.  Otherwise it will execute while your application is stopped
 # before the build step.  This script gets executed directly, so it
 # could be python, php, ruby, etc.
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+if [ "${OPENSHIFT_NODEJS_VERSION}" == "0.10" ]
+then
+  client_error "Unable to create etherpad-1.0 with NodeJS-0.10, this version works only with NodeJS-0.6"
+  client_error "To create etherpad with NodeJS-0.10, please try the following repository:"
+  client_error "URL: https://github.com/wshearn/etherpad-example"
+  exit 137
+fi
