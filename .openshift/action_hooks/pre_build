@@ -3,3 +3,13 @@
 # available.  Otherwise it will execute while your application is stopped
 # before the build step.  This script gets executed directly, so it
 # could be python, php, ruby, etc.
+
+if [ "${OPENSHIFT_NODEJS_VERSION}" == "0.10" ]
+then
+	echo "Preparing etherpad for NodeJS-0.10"
+	pushd ${OPENSHIFT_REPO_DIR}
+	patch -p1 < .openshift/diff.patch --force
+	popd
+else
+	echo "Preparing etherpad for NodeJS-0.06"
+fi
